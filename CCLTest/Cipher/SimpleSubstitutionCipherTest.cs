@@ -11,16 +11,16 @@ namespace CCLTest.Cipher
     [TestClass]
     public class SimpleSubstitutionCipherTest
     {
-        private SimpleSubstitutionCipher<char, char> _ssc1;
-        private SimpleSubstitutionCipher<char, char> _rot13;
-        private SimpleSubstitutionCipher<char, char> _caesar;
+        private SimpleSubstitutionCipher<char> _ssc1;
+        private SimpleSubstitutionCipher<char> _rot13;
+        private SimpleSubstitutionCipher<char> _caesar;
 
         [TestInitialize]
         public void Initialize()
         {
-            _ssc1 = new SimpleSubstitutionCipher<char, char>("0123456789", "qwertyuiop");
-            _rot13 = new SimpleSubstitutionCipher<char, char>("abcdefghijklmnopqrstuvwxyz", "nopqrstuvwxyzabcdefghijklm");
-            _caesar = new SimpleSubstitutionCipher<char, char>("abcdefghijklmnopqrstuvwxyz", "defghijklmnopqrstuvwxyzabc");
+            _ssc1 = new SimpleSubstitutionCipher<char>("0123456789", "qwertyuiop");
+            _rot13 = new SimpleSubstitutionCipher<char>("abcdefghijklmnopqrstuvwxyz", "nopqrstuvwxyzabcdefghijklm");
+            _caesar = new SimpleSubstitutionCipher<char>("abcdefghijklmnopqrstuvwxyz", "defghijklmnopqrstuvwxyzabc");
         }
 
         [TestMethod]

@@ -5,20 +5,20 @@ using System.Linq;
 
 namespace CCL.Cipher
 {
-    public class SimpleSubstitutionCipher<T1, T2>
+    public class SimpleSubstitutionCipher<T>
     {
-        private readonly Dictionary<T1, T2> _lookupTable;
-        private readonly Dictionary<T2, T1> _reverseLookupTable;
+        private readonly Dictionary<T, T> _lookupTable;
+        private readonly Dictionary<T, T> _reverseLookupTable;
 
-        public SimpleSubstitutionCipher(IEnumerable<T1> inputAlphabet, IEnumerable<T2> outputAlphabet)
+        public SimpleSubstitutionCipher(IEnumerable<T> inputAlphabet, IEnumerable<T> outputAlphabet)
         {
             // Both alphabets must not be null.
             if (inputAlphabet == null) throw new ArgumentNullException(nameof(inputAlphabet));
             if (outputAlphabet == null) throw new ArgumentNullException(nameof(outputAlphabet));
 
             // Let's convert these enumerables into arrays. Try and convert if possible. 
-            var inputAlphabetArray = inputAlphabet as T1[] ?? inputAlphabet.ToArray();
-            var outputAlphabetArray = outputAlphabet as T2[] ?? outputAlphabet.ToArray();
+            var inputAlphabetArray = inputAlphabet as T[] ?? inputAlphabet.ToArray();
+            var outputAlphabetArray = outputAlphabet as T[] ?? outputAlphabet.ToArray();
 
             // Length of both alphabets must be same. 
             if (inputAlphabetArray.Length != outputAlphabetArray.Length) throw new ArgumentException();
@@ -28,9 +28,9 @@ namespace CCL.Cipher
             if (outputAlphabetArray.Distinct().Count() != outputAlphabetArray.Length) throw new ArgumentException();
 
             // Lookup table for encryption.
-            _lookupTable = new Dictionary<T1, T2>();
+            _lookupTable = new Dictionary<T, T>();
             // Lookup table for decryption. 
-            _reverseLookupTable = new Dictionary<T2, T1>();
+            _reverseLookupTable = new Dictionary<T, T>();
             for (var i = 0; i < inputAlphabetArray.Count(); i++)
             {
                 _lookupTable.Add(inputAlphabetArray[i], outputAlphabetArray[i]);
@@ -38,16 +38,18 @@ namespace CCL.Cipher
             }
         }
 
-        public IEnumerable<T2> Encrypt(IEnumerable<T1> plainText)
+        public IEnumerable<T> Encrypt(IEnumerable<T> plainText)
         {
-            var cipherText = from letter in plainText select _lookupTable[letter];
+            var cipherText = from letter in plainText
+                             select _lookupTable.ContainsKey(letter) ? _lookupTable[letter] : letter;
             Debug.WriteLine(string.Join(", ", cipherText));
             return cipherText.AsEnumerable();
         }
 
-        public IEnumerable<T1> Decrypt(IEnumerable<T2> cipherText)
+        public IEnumerable<T> Decrypt(IEnumerable<T> cipherText)
         {
-            var plainText = from letter in cipherText select _reverseLookupTable[letter];
+            var plainText = from letter in cipherText
+                            select _reverseLookupTable.ContainsKey(letter) ? _reverseLookupTable[letter] : letter;
             Debug.WriteLine(string.Join(", ", plainText));
             return plainText.AsEnumerable();
         }
