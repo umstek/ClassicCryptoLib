@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace CCL.Cipher
@@ -26,7 +27,9 @@ namespace CCL.Cipher
             if (inputAlphabetArray.Distinct().Count() != inputAlphabetArray.Length) throw new ArgumentException();
             if (outputAlphabetArray.Distinct().Count() != outputAlphabetArray.Length) throw new ArgumentException();
 
+            // Lookup table for encryption.
             _lookupTable = new Dictionary<T1, T2>();
+            // Lookup table for decryption. 
             _reverseLookupTable = new Dictionary<T2, T1>();
             for (var i = 0; i < inputAlphabetArray.Count(); i++)
             {
@@ -38,12 +41,14 @@ namespace CCL.Cipher
         public IEnumerable<T2> Encrypt(IEnumerable<T1> plainText)
         {
             var cipherText = from letter in plainText select _lookupTable[letter];
+            Debug.WriteLine(string.Join(", ", cipherText));
             return cipherText.AsEnumerable();
         }
 
         public IEnumerable<T1> Decrypt(IEnumerable<T2> cipherText)
         {
             var plainText = from letter in cipherText select _reverseLookupTable[letter];
+            Debug.WriteLine(string.Join(", ", plainText));
             return plainText.AsEnumerable();
         }
 
