@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using CCL.Cipher;
+﻿using System.Linq;
+using CCL.Cipher.SubstitutionCipher;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace CCLTest.Cipher
+namespace CCLTest.CipherTest.SubstitutionCipherTest
 {
     [TestClass]
     public class SimpleSubstitutionCipherTest
@@ -18,7 +14,7 @@ namespace CCLTest.Cipher
         [TestInitialize]
         public void Initialize()
         {
-            _ssc1 = new SimpleSubstitutionCipher<char>("0123456789", "qwertyuiop");
+            _ssc1 = new SimpleSubstitutionCipher<char>("0123456789", "makeprofit");
             _rot13 = new SimpleSubstitutionCipher<char>("abcdefghijklmnopqrstuvwxyz", "nopqrstuvwxyzabcdefghijklm");
             _caesar = new SimpleSubstitutionCipher<char>("abcdefghijklmnopqrstuvwxyz", "defghijklmnopqrstuvwxyzabc");
         }
@@ -26,7 +22,7 @@ namespace CCLTest.Cipher
         [TestMethod]
         public void TestEncrypt()
         {
-            CollectionAssert.AreEqual("qwertyuiop".ToArray(), _ssc1.Encrypt("0123456789").ToArray());
+            CollectionAssert.AreEqual("makeprofit".ToArray(), _ssc1.Encrypt("0123456789").ToArray());
 
             CollectionAssert.AreEqual("nycun".ToArray(), _rot13.Encrypt("alpha").ToArray()); // With rot13, encrypt and
             CollectionAssert.AreEqual("nycun".ToArray(), _rot13.Decrypt("alpha").ToArray()); // decrypt are the same.
@@ -37,7 +33,7 @@ namespace CCLTest.Cipher
         [TestMethod]
         public void TestDecrypt()
         {
-            CollectionAssert.AreEqual("0123456789".ToArray(), _ssc1.Decrypt("qwertyuiop").ToArray());
+            CollectionAssert.AreEqual("0123456789".ToArray(), _ssc1.Decrypt("makeprofit").ToArray());
 
             CollectionAssert.AreEqual("alpha".ToArray(), _rot13.Decrypt("nycun").ToArray());
             CollectionAssert.AreEqual("alpha".ToArray(), _rot13.Encrypt("nycun").ToArray());

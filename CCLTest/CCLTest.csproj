@@ -50,7 +50,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Cipher\SimpleSubstitutionCipherTest.cs" />
+    <Compile Include="CipherTest\SubstitutionCipherTest\SimpleSubstitutionCipherTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +58,9 @@
       <Project>{174b1b13-9d50-4404-9ae2-b9515ab798c9}</Project>
       <Name>CCL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CipherTest\TranspositionCipherTest\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

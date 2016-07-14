@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace CCL.Cipher
+namespace CCL.Cipher.SubstitutionCipher
 {
     public class SimpleSubstitutionCipher<T>
     {
