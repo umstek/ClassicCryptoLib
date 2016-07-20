@@ -42,7 +42,7 @@ namespace CCL.Cipher.SubstitutionCipher
         {
             var cipherText = from letter in plainText
                              select _lookupTable.ContainsKey(letter) ? _lookupTable[letter] : letter;
-            Debug.WriteLine(string.Join(", ", cipherText));
+            Debug.WriteLine($"{string.Join(", ", plainText)} -> {string.Join(", ", cipherText)}");
             return cipherText.AsEnumerable();
         }
 
@@ -50,7 +50,7 @@ namespace CCL.Cipher.SubstitutionCipher
         {
             var plainText = from letter in cipherText
                             select _reverseLookupTable.ContainsKey(letter) ? _reverseLookupTable[letter] : letter;
-            Debug.WriteLine(string.Join(", ", plainText));
+            Debug.WriteLine($"{string.Join(", ", cipherText)} -> {string.Join(", ", plainText)}");
             return plainText.AsEnumerable();
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
+using System.Linq;
 using CCL.Cipher.SubstitutionCipher;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -11,8 +12,7 @@ namespace CCLTest.CipherTest.SubstitutionCipherTest
         private SimpleSubstitutionCipher<char> _rot13;
         private SimpleSubstitutionCipher<char> _caesar;
 
-        [TestInitialize]
-        public void Initialize()
+        public SimpleSubstitutionCipherTest()
         {
             _ssc1 = new SimpleSubstitutionCipher<char>("0123456789", "makeprofit");
             _rot13 = new SimpleSubstitutionCipher<char>("abcdefghijklmnopqrstuvwxyz", "nopqrstuvwxyzabcdefghijklm");
