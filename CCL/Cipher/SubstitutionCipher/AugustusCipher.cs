@@ -1,25 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CCL.Cipher.SubstitutionCipher
 {
-    class AugustusCipher : ShiftCipher<char>
+    /// <summary>
+    ///     The Augustus Cipher
+    ///     The Augustus Cipher was invented by Julius Caesar's nephew, Augustus who thought Caesar Cipher was too complex.
+    ///     This Cipher features a shift cipher with a shift of +1, but replaces 'z' with 'aa' instead of just 'a'.
+    /// </summary>
+    public class AugustusCipher : ShiftCipher<char>
     {
-        public AugustusCipher(IEnumerable<char> inputAlphabet, int b) : base(inputAlphabet, b)
+        public AugustusCipher() : base("abcdefghijklmnopqrstuvwxyz", 1)
         {
         }
 
         public override IEnumerable<char> Encrypt(IEnumerable<char> plainText)
         {
-            return ((string)base.Encrypt(plainText)).Replace("a", "aa");
+            return new string(base.Encrypt(plainText).ToArray()).Replace("a", "aa");
         }
 
         public override IEnumerable<char> Decrypt(IEnumerable<char> cipherText)
         {
-            return base.Decrypt(((string)cipherText).Replace("aa", "a"));
+            return base.Decrypt(new string(cipherText.ToArray()).Replace("aa", "a"));
         }
     }
 }

@@ -1,16 +1,17 @@
-﻿using System.Diagnostics;
-using System.Linq;
+﻿using System.Linq;
 using CCL.Cipher.SubstitutionCipher;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CCLTest.CipherTest.SubstitutionCipherTest
 {
+    /// <summary>
+    /// </summary>
     [TestClass]
     public class SimpleSubstitutionCipherTest
     {
-        private SimpleSubstitutionCipher<char> _ssc1;
-        private SimpleSubstitutionCipher<char> _rot13;
-        private SimpleSubstitutionCipher<char> _caesar;
+        private readonly SimpleSubstitutionCipher<char> _caesar;
+        private readonly SimpleSubstitutionCipher<char> _rot13;
+        private readonly SimpleSubstitutionCipher<char> _ssc1;
 
         public SimpleSubstitutionCipherTest()
         {

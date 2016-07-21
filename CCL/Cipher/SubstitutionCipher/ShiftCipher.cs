@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CCL.Cipher.SubstitutionCipher
 {
-    class ShiftCipher<T> : AffineCipher<T>
+    /// <summary>
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class ShiftCipher<T> : AffineCipher<T>
     {
-        public ShiftCipher(IEnumerable<T> inputAlphabet, int b) : base(inputAlphabet, 0, b)
+        public ShiftCipher(IEnumerable<T> inputAlphabet, int b) : base(inputAlphabet, 1, b)
         {
         }
     }

@@ -1,30 +1,25 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Linq;
 using CCL.Cipher.SubstitutionCipher;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CCLTest.CipherTest.SubstitutionCipherTest
 {
     /// <summary>
-    /// Summary description for AffineCipherTest
+    ///     Summary description for AffineCipherTest
     /// </summary>
     [TestClass]
     public class AffineCipherTest
     {
-
-        private readonly AffineCipher<char> _affine;
+        private readonly AffineCipher<char> _cipher;
 
         public AffineCipherTest()
         {
-            _affine = new AffineCipher<char>("abcdefghijklmnopqrstuvwxyz", 1, 1);
+            _cipher = new AffineCipher<char>("abcdefghijklmnopqrstuvwxyz", 5, 8);
         }
 
         /// <summary>
-        /// Gets or sets the test context which provides
-        /// information about and functionality for the current test run.
+        ///     Gets or sets the test context which provides
+        ///     information about and functionality for the current test run.
         /// </summary>
         public TestContext TestContext { get; set; }
 
@@ -32,7 +27,7 @@ namespace CCLTest.CipherTest.SubstitutionCipherTest
         public void TestEncrypt()
         {
             {
-                CollectionAssert.AreEqual("bcdef".ToArray(), _affine.Encrypt("abcde").ToArray());
+                CollectionAssert.AreEqual("ihhwvc swfrcp".ToArray(), _cipher.Encrypt("affine cipher").ToArray());
             }
         }
 
@@ -40,7 +35,7 @@ namespace CCLTest.CipherTest.SubstitutionCipherTest
         public void TestDecrypt()
         {
             {
-                CollectionAssert.AreEqual("abcde".ToArray(), _affine.Decrypt("bcdef").ToArray());
+                CollectionAssert.AreEqual("affine cipher".ToArray(), _cipher.Decrypt("ihhwvc swfrcp").ToArray());
             }
         }
 

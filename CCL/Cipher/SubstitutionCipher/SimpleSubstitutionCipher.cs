@@ -5,6 +5,12 @@ using System.Linq;
 
 namespace CCL.Cipher.SubstitutionCipher
 {
+    /// <summary>
+    ///     Generic Simple Substitution Cipher
+    ///     Encrypts plaintext by substituting each character in plaintext with a character in cipher alphabet,
+    ///     which corresponds to the respective plaintext character.
+    /// </summary>
+    /// <typeparam name="T">Type of the Data</typeparam>
     public class SimpleSubstitutionCipher<T>
     {
         private readonly Dictionary<T, T> _lookupTable;
@@ -12,6 +18,9 @@ namespace CCL.Cipher.SubstitutionCipher
 
         public SimpleSubstitutionCipher(IEnumerable<T> inputAlphabet, IEnumerable<T> outputAlphabet)
         {
+            Debug.WriteLine("i/a: " + string.Join(" ", from t in inputAlphabet select t.ToString()));
+            Debug.WriteLine("o/a: " + string.Join(" ", from t in outputAlphabet select t.ToString()));
+
             // Both alphabets must not be null.
             if (inputAlphabet == null) throw new ArgumentNullException(nameof(inputAlphabet));
             if (outputAlphabet == null) throw new ArgumentNullException(nameof(outputAlphabet));
@@ -53,6 +62,5 @@ namespace CCL.Cipher.SubstitutionCipher
             Debug.WriteLine($"{string.Join(", ", cipherText)} -> {string.Join(", ", plainText)}");
             return plainText.AsEnumerable();
         }
-
     }
 }

@@ -53,6 +53,11 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CipherTest\SubstitutionCipherTest\AffineCipherTest.cs" />
+    <Compile Include="CipherTest\SubstitutionCipherTest\AtbashCipherTest.cs" />
+    <Compile Include="CipherTest\SubstitutionCipherTest\AugustusCipherTest.cs" />
+    <Compile Include="CipherTest\SubstitutionCipherTest\CaesarCipherTest.cs" />
+    <Compile Include="CipherTest\SubstitutionCipherTest\Rot13CipherTest.cs" />
+    <Compile Include="CipherTest\SubstitutionCipherTest\ShiftCipherTest.cs" />
     <Compile Include="CipherTest\SubstitutionCipherTest\SimpleSubstitutionCipherTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

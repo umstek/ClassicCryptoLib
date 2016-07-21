@@ -4,9 +4,8 @@ using System.Linq;
 
 namespace CCL.Cipher.SubstitutionCipher
 {
-
     /// <summary>
-    /// The Affine Cipher
+    ///     The Affine Cipher
     /// </summary>
     /// <typeparam name="T">Type of the data being encrypted. </typeparam>
     public class AffineCipher<T> : SimpleSubstitutionCipher<T>
@@ -18,11 +17,12 @@ namespace CCL.Cipher.SubstitutionCipher
 
         private static IEnumerable<T> AffineAlphabet(IEnumerable<T> inputAlphabet, int a, int b)
         {
-            if (a < 0 || b < 0) throw new ArgumentException();
-            if (!AreCoprime(a, b)) throw new ArgumentException();
+            if (a <= 0 || b < 0) throw new ArgumentException();
+            if (!AreCoprime(a, 26)) throw new ArgumentException();
 
             var enumerable = inputAlphabet as T[] ?? inputAlphabet.ToArray();
-            return from index in Enumerable.Range(0, enumerable.Length) select enumerable[(a * index + b) % enumerable.Length];
+            return from index in Enumerable.Range(0, enumerable.Length)
+                   select enumerable[(a * index + b) % enumerable.Length];
         }
 
         private static bool AreCoprime(int a, int b)
@@ -32,6 +32,5 @@ namespace CCL.Cipher.SubstitutionCipher
 
             return true;
         }
-
     }
 }
