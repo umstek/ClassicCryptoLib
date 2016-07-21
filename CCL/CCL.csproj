@@ -41,6 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cipher\SubstitutionCipher\AffineCipher.cs" />
+    <Compile Include="Cipher\SubstitutionCipher\AugustusCipher.cs" />
+    <Compile Include="Cipher\SubstitutionCipher\CaesarCipher.cs" />
+    <Compile Include="Cipher\SubstitutionCipher\Rot13.cs" />
+    <Compile Include="Cipher\SubstitutionCipher\ShiftCipher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Cipher\SubstitutionCipher\SimpleSubstitutionCipher.cs" />
   </ItemGroup>
