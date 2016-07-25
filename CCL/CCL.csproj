@@ -44,6 +44,7 @@
     <Compile Include="Cipher\SubstitutionCipher\AtbashCipher.cs" />
     <Compile Include="Cipher\SubstitutionCipher\AugustusCipher.cs" />
     <Compile Include="Cipher\SubstitutionCipher\CaesarCipher.cs" />
+    <Compile Include="Cipher\SubstitutionCipher\HomophonicSubstitutionCipher.cs" />
     <Compile Include="Cipher\SubstitutionCipher\Rot13Cipher.cs" />
     <Compile Include="Cipher\SubstitutionCipher\ShiftCipher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
