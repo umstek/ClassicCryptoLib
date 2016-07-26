@@ -24,6 +24,7 @@ namespace CCL.Cipher.SubstitutionCipher
             }
 
             _policy = substitutionPolicy;
+            _anchorDictionary = new Dictionary<T, int>();
 
             // Every letter must have at least one substitute. 
             if (substitutionTable.Values.Any(en => !en.Any())) throw new ArgumentException();
