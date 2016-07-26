@@ -1,29 +1,26 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using CCL.Cipher.SubstitutionCipher;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CCLTest.CipherTest.SubstitutionCipherTest
 {
     /// <summary>
-    /// Summary description for Rot13CipherTest
+    ///     Summary description for Rot13CipherTest
     /// </summary>
     [TestClass]
     public class Rot13CipherTest
     {
-
         private readonly Rot13Cipher _cipher;
+
         public Rot13CipherTest()
         {
             _cipher = new Rot13Cipher();
         }
 
         /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
+        ///     Gets or sets the test context which provides
+        ///     information about and functionality for the current test run.
+        /// </summary>
         public TestContext TestContext { get; set; }
 
         [TestMethod]
@@ -37,6 +34,5 @@ namespace CCLTest.CipherTest.SubstitutionCipherTest
         {
             CollectionAssert.AreEqual("chicken".ToCharArray(), _cipher.Decrypt("puvpxra").ToArray());
         }
-
     }
 }

@@ -22,13 +22,13 @@ namespace CCL.Cipher.SubstitutionCipher
 
             var enumerable = inputAlphabet as T[] ?? inputAlphabet.ToArray();
             return from index in Enumerable.Range(0, enumerable.Length)
-                   select enumerable[(a * index + b) % enumerable.Length];
+                select enumerable[(a*index + b)%enumerable.Length];
         }
 
         private static bool AreCoprime(int a, int b)
         {
-            if (a % 2 == 0 && b % 2 == 0) return false;
-            for (var i = 3; i <= Math.Min(a, b); i += 2) if (a % i == 0 && b % i == 0) return false;
+            if (a%2 == 0 && b%2 == 0) return false;
+            for (var i = 3; i <= Math.Min(a, b); i += 2) if (a%i == 0 && b%i == 0) return false;
 
             return true;
         }

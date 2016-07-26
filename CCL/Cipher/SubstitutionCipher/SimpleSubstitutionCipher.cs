@@ -50,7 +50,7 @@ namespace CCL.Cipher.SubstitutionCipher
         public virtual IEnumerable<T> Encrypt(IEnumerable<T> plainText)
         {
             var cipherText = from letter in plainText
-                             select _lookupTable.ContainsKey(letter) ? _lookupTable[letter] : letter;
+                select _lookupTable.ContainsKey(letter) ? _lookupTable[letter] : letter;
             Debug.WriteLine($"{string.Join(", ", plainText)} -> {string.Join(", ", cipherText)}");
             return cipherText.AsEnumerable();
         }
@@ -58,7 +58,7 @@ namespace CCL.Cipher.SubstitutionCipher
         public virtual IEnumerable<T> Decrypt(IEnumerable<T> cipherText)
         {
             var plainText = from letter in cipherText
-                            select _reverseLookupTable.ContainsKey(letter) ? _reverseLookupTable[letter] : letter;
+                select _reverseLookupTable.ContainsKey(letter) ? _reverseLookupTable[letter] : letter;
             Debug.WriteLine($"{string.Join(", ", cipherText)} -> {string.Join(", ", plainText)}");
             return plainText.AsEnumerable();
         }

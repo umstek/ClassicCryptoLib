@@ -38,6 +38,5 @@ namespace CCLTest.CipherTest.SubstitutionCipherTest
                 CollectionAssert.AreEqual("affine cipher".ToArray(), _cipher.Decrypt("ihhwvc swfrcp").ToArray());
             }
         }
-
     }
 }
