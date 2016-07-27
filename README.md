@@ -9,7 +9,7 @@ Classical Cryptography in Modern Code
       - Affine Cipher - *Generic*
         - Atbash Cipher - *Generic*
         - Shift Cipher - *Generic*
-          - Caesar Cipher - *char*
-          - Augustus Cipher - *char*
-          - ROT13 - *char*
+          - Caesar Cipher - *char English lowercase*
+          - Augustus Cipher - *char English lowercase*
+          - ROT13 - *char English lowercase*
 
