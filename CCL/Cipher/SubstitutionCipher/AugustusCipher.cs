@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace CCL.Cipher.SubstitutionCipher
+﻿namespace CCL.Cipher.SubstitutionCipher
 {
     /// <summary>
     ///     The Augustus Cipher
@@ -10,18 +7,14 @@ namespace CCL.Cipher.SubstitutionCipher
     /// </summary>
     public class AugustusCipher : ShiftCipher<char>
     {
-        public AugustusCipher() : base("abcdefghijklmnopqrstuvwxyz", 1)
+        public AugustusCipher() : base("abcdefghijklmnopqrstuvwxyz".ToCharArray(), 1)
         {
         }
 
-        public override IEnumerable<char> Encrypt(IEnumerable<char> plainText)
-        {
-            return new string(base.Encrypt(plainText).ToArray()).Replace("a", "aa");
-        }
+        public override char[] Encrypt(char[] plainText)
+            => new string(base.Encrypt(plainText)).Replace("a", "aa").ToCharArray();
 
-        public override IEnumerable<char> Decrypt(IEnumerable<char> cipherText)
-        {
-            return base.Decrypt(new string(cipherText.ToArray()).Replace("aa", "a"));
-        }
+        public override char[] Decrypt(char[] cipherText)
+            => base.Decrypt(new string(cipherText).Replace("aa", "a").ToCharArray());
     }
 }

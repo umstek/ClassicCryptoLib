@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace CCL.Cipher.SubstitutionCipher
@@ -20,15 +19,9 @@ namespace CCL.Cipher.SubstitutionCipher
         private readonly Random _random;
         private readonly Dictionary<T, T> _reverseLookupTable;
 
-        public HomophonicSubstitutionCipher(IDictionary<T, IEnumerable<T>> substitutionTable,
+        public HomophonicSubstitutionCipher(Dictionary<T, T[]> substitutionTable,
             SubstitutionPolicy substitutionPolicy)
         {
-            Debug.WriteLine("i/a letter: substitute1, substitute2, ...");
-            foreach (var kvp in substitutionTable)
-            {
-                Debug.WriteLine($"{kvp.Key}: {string.Join(", ", kvp.Value)}");
-            }
-
             _random = new Random();
 
             _policy = substitutionPolicy;
@@ -54,31 +47,20 @@ namespace CCL.Cipher.SubstitutionCipher
         }
 
         private T SequentialIndex(T letter)
-        {
-            return _lookupTable[letter][_anchorDictionary[letter]++%_lookupTable[letter].Count];
-        }
+            => _lookupTable[letter][_anchorDictionary[letter]++ % _lookupTable[letter].Count];
 
-        private T RandomIndex(T letter)
-        {
-            return _lookupTable[letter][_random.Next()%_lookupTable[letter].Count];
-        }
+        private T RandomIndex(T letter) => _lookupTable[letter][_random.Next() % _lookupTable[letter].Count];
 
-        public virtual IEnumerable<T> Encrypt(IEnumerable<T> plainText)
-        {
-            var cipherText = from letter in plainText
-                let substitute =
+        public virtual T[] Encrypt(T[] plainText) => plainText.Select(letter =>
+                new
+                {
+                    letter,
+                    substitute =
                     _policy == SubstitutionPolicy.Sequential ? SequentialIndex(letter) : RandomIndex(letter)
-                select _lookupTable.ContainsKey(letter) ? substitute : letter;
-            Debug.WriteLine($"{string.Join(", ", plainText)} -> {string.Join(", ", cipherText)}");
-            return cipherText.AsEnumerable();
-        }
+                })
+            .Select(t => _lookupTable.ContainsKey(t.letter) ? t.substitute : t.letter).ToArray();
 
-        public virtual IEnumerable<T> Decrypt(IEnumerable<T> cipherText)
-        {
-            var plainText = from letter in cipherText
-                select _reverseLookupTable.ContainsKey(letter) ? _reverseLookupTable[letter] : letter;
-            Debug.WriteLine($"{string.Join(", ", cipherText)} -> {string.Join(", ", plainText)}");
-            return plainText.AsEnumerable();
-        }
+        public virtual T[] Decrypt(T[] cipherText) => cipherText.Select(
+            letter => _reverseLookupTable.ContainsKey(letter) ? _reverseLookupTable[letter] : letter).ToArray();
     }
 }

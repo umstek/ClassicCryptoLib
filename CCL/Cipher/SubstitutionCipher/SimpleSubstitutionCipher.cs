@@ -16,51 +16,48 @@ namespace CCL.Cipher.SubstitutionCipher
         private readonly Dictionary<T, T> _lookupTable;
         private readonly Dictionary<T, T> _reverseLookupTable;
 
-        public SimpleSubstitutionCipher(IEnumerable<T> inputAlphabet, IEnumerable<T> outputAlphabet)
+        public SimpleSubstitutionCipher(T[] inputAlphabet, T[] outputAlphabet)
         {
-            Debug.WriteLine("i/a: " + string.Join(" ", from t in inputAlphabet select t.ToString()));
-            Debug.WriteLine("o/a: " + string.Join(" ", from t in outputAlphabet select t.ToString()));
+            Debug.WriteLine($"i/a: {string.Join(" ", inputAlphabet.Select(t => t.ToString()))}");
+            Debug.WriteLine($"o/a: {string.Join(" ", outputAlphabet.Select(t => t.ToString()))}");
 
             // Both alphabets must not be null.
             if (inputAlphabet == null) throw new ArgumentNullException(nameof(inputAlphabet));
             if (outputAlphabet == null) throw new ArgumentNullException(nameof(outputAlphabet));
 
-            // Let's convert these enumerables into arrays. Try and convert if possible. 
-            var inputAlphabetArray = inputAlphabet as T[] ?? inputAlphabet.ToArray();
-            var outputAlphabetArray = outputAlphabet as T[] ?? outputAlphabet.ToArray();
-
             // Length of both alphabets must be same. 
-            if (inputAlphabetArray.Length != outputAlphabetArray.Length) throw new ArgumentException();
+            if (inputAlphabet.Length != outputAlphabet.Length) throw new ArgumentException();
 
             // Must not contain repeated elements. 
-            if (inputAlphabetArray.Distinct().Count() != inputAlphabetArray.Length) throw new ArgumentException();
-            if (outputAlphabetArray.Distinct().Count() != outputAlphabetArray.Length) throw new ArgumentException();
+            if (inputAlphabet.Distinct().Count() != inputAlphabet.Length) throw new ArgumentException();
+            if (outputAlphabet.Distinct().Count() != outputAlphabet.Length) throw new ArgumentException();
 
             // Lookup table for encryption.
             _lookupTable = new Dictionary<T, T>();
             // Lookup table for decryption. 
             _reverseLookupTable = new Dictionary<T, T>();
-            for (var i = 0; i < inputAlphabetArray.Count(); i++)
+            for (var i = 0; i < inputAlphabet.Length; i++)
             {
-                _lookupTable.Add(inputAlphabetArray[i], outputAlphabetArray[i]);
-                _reverseLookupTable.Add(outputAlphabetArray[i], inputAlphabetArray[i]);
+                _lookupTable.Add(inputAlphabet[i], outputAlphabet[i]);
+                _reverseLookupTable.Add(outputAlphabet[i], inputAlphabet[i]);
             }
         }
 
-        public virtual IEnumerable<T> Encrypt(IEnumerable<T> plainText)
+        public virtual T[] Encrypt(T[] plainText)
         {
-            var cipherText = from letter in plainText
-                select _lookupTable.ContainsKey(letter) ? _lookupTable[letter] : letter;
+            var cipherText =
+                plainText.Select(letter => _lookupTable.ContainsKey(letter) ? _lookupTable[letter] : letter).ToArray();
             Debug.WriteLine($"{string.Join(", ", plainText)} -> {string.Join(", ", cipherText)}");
-            return cipherText.AsEnumerable();
+            return cipherText;
         }
 
-        public virtual IEnumerable<T> Decrypt(IEnumerable<T> cipherText)
+        public virtual T[] Decrypt(T[] cipherText)
         {
-            var plainText = from letter in cipherText
-                select _reverseLookupTable.ContainsKey(letter) ? _reverseLookupTable[letter] : letter;
+            var plainText =
+                cipherText.Select(
+                    letter => _reverseLookupTable.ContainsKey(letter) ? _reverseLookupTable[letter] : letter).ToArray();
             Debug.WriteLine($"{string.Join(", ", cipherText)} -> {string.Join(", ", plainText)}");
-            return plainText.AsEnumerable();
+            return plainText;
         }
     }
 }

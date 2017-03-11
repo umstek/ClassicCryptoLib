@@ -30,7 +30,7 @@ namespace CCLTest.CipherTest.SubstitutionCipherTest
                     {'9', "jt"}
                 },
                 HomophonicSubstitutionCipher<char>.SubstitutionPolicy.Sequential
-                );
+            );
 
             _cipherR = new HomophonicSubstitutionCipher<char>( // Arbitrary shop-cipher. Random.
                 new Dictionary<char, IEnumerable<char>>
@@ -47,7 +47,7 @@ namespace CCLTest.CipherTest.SubstitutionCipherTest
                     {'9', "jt"}
                 },
                 HomophonicSubstitutionCipher<char>.SubstitutionPolicy.Random
-                );
+            );
         }
 
         /// <summary>

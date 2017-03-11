@@ -4,7 +4,7 @@
     /// </summary>
     public class Rot13Cipher : ShiftCipher<char>
     {
-        public Rot13Cipher() : base("abcdefghijklmnopqrstuvwxyz", 13)
+        public Rot13Cipher() : base("abcdefghijklmnopqrstuvwxyz".ToCharArray(), 13)
         {
         }
     }
